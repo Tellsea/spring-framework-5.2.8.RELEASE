@@ -1,4 +1,4 @@
-package cn.tellsea.Beanlifecycle.config;
+package cn.tellsea.springbean.lifecycle;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyValues;

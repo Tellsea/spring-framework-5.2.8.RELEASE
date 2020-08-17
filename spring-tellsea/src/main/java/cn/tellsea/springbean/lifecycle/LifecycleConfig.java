@@ -1,4 +1,4 @@
-package cn.tellsea.springbean.lifecycle.config;
+package cn.tellsea.springbean.lifecycle;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -7,8 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
  * @author Tellsea
  * @date 2020-8-10
  */
-@ComponentScan("cn.tellsea")
-public class AppConfig {
+@ComponentScan("cn.tellsea.springbean.lifecycle")
+public class LifecycleConfig {
 
 	@Bean(initMethod = "myInit", destroyMethod = "myDestroy")
 	public PersonBean personBean() {

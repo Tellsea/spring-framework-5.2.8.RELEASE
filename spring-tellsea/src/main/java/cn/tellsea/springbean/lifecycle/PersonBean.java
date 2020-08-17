@@ -1,4 +1,4 @@
-package cn.tellsea.springbean.lifecycle.config;
+package cn.tellsea.springbean.lifecycle;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.*;
@@ -13,6 +13,7 @@ public class PersonBean implements BeanNameAware, BeanFactoryAware, ApplicationC
 		InitializingBean, DisposableBean {
 
 	private String name;
+
 	private int age;
 
 	/**

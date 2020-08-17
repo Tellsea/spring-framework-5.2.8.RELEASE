@@ -1,4 +1,4 @@
-package cn.tellsea.Beanlifecycle.config;
+package cn.tellsea.springbean.extendpostprocessor;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -11,17 +11,13 @@ import org.springframework.context.annotation.Configuration;
  * @date 2020-8-14
  */
 @Configuration
-public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
-
-	public MyBeanFactoryPostProcessor() {
-		System.out.println("【BeanFactoryPostProcessor接口】调用BeanFactoryPostProcessor实现类构造方法");
-	}
+public class ExtBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
 
 	@Override
-	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)
-			throws BeansException {
+	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+		//spring的bean创建之前，修改bean的定义属性
 		System.out.println("【BeanFactoryPostProcessor接口】调用BeanFactoryPostProcessor接口的postProcessBeanFactory方法");
-		BeanDefinition beanDefinition = beanFactory.getBeanDefinition("personBean");
-		beanDefinition.getPropertyValues().addPropertyValue("age", "22");
+//		BeanDefinition beanDefinition = beanFactory.getBeanDefinition("personBean");
+//		beanDefinition.getPropertyValues().addPropertyValue("age", "22");
 	}
 }

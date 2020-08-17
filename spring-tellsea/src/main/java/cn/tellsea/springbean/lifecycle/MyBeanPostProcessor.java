@@ -1,4 +1,4 @@
-package cn.tellsea.springbean.lifecycle.config;
+package cn.tellsea.springbean.lifecycle;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;

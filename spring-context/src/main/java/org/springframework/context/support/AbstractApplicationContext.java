@@ -497,31 +497,31 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 			prepareBeanFactory(beanFactory);
 
 			try {
-				// 允许在上下文子类中对bean工厂进行后处理。
+				// 1、允许在上下文子类中对beanFactory进行后处理。
 				postProcessBeanFactory(beanFactory);
 
-				// 调用在上下文中注册为bean的工厂处理器。
+				// 2、调用在上下文中注册为bean的工厂处理器。
 				invokeBeanFactoryPostProcessors(beanFactory);
 
-				// 注册拦截Bean创建的Bean处理器。
+				// 3、注册拦截Bean创建的Bean处理器。
 				registerBeanPostProcessors(beanFactory);
 
-				// 为此上下文初始化消息源。
+				// 4、为此上下文初始化消息源。
 				initMessageSource();
 
-				// 为此上下文初始化事件多播器。
+				// 5、为此上下文初始化事件多播器。
 				initApplicationEventMulticaster();
 
-				// 在特定上下文子类中初始化其他特殊bean。
+				// 6、在特定上下文子类中初始化其他特殊bean。
 				onRefresh();
 
-				// 检查侦听器bean并注册它们。
+				// 7、检查侦听器bean并注册它们。
 				registerListeners();
 
-				// 实例化所有剩余的（非延迟初始化）单例。
+				// 8、实例化所有剩余的（非延迟初始化）单例。
 				finishBeanFactoryInitialization(beanFactory);
 
-				// 最后一步：发布相应的事件。
+				// 9、最后一步：发布相应的事件。
 				finishRefresh();
 			}
 
@@ -677,8 +677,8 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	protected void invokeBeanFactoryPostProcessors(ConfigurableListableBeanFactory beanFactory) {
 		PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(beanFactory, getBeanFactoryPostProcessors());
 
-		// Detect a LoadTimeWeaver and prepare for weaving, if found in the meantime
-		// (e.g. through an @Bean method registered by ConfigurationClassPostProcessor)
+		// 检测LoadTimeWeaver并准备编织（如果在此期间发现）
+		// （例如，通过ConfigurationClassPostProcessor注册的@Bean方法）
 		if (beanFactory.getTempClassLoader() == null && beanFactory.containsBean(LOAD_TIME_WEAVER_BEAN_NAME)) {
 			beanFactory.addBeanPostProcessor(new LoadTimeWeaverAwareProcessor(beanFactory));
 			beanFactory.setTempClassLoader(new ContextTypeMatchClassLoader(beanFactory.getBeanClassLoader()));
@@ -686,9 +686,9 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 	}
 
 	/**
-	 * Instantiate and register all BeanPostProcessor beans,
-	 * respecting explicit order if given.
-	 * <p>Must be called before any instantiation of application beans.
+	 *实例化并注册所有BeanPostProcessor Bean，
+	 *遵守明确的命令（如果有）。
+	 * <p>必须在应用程序bean的任何实例化之前被调用。
 	 */
 	protected void registerBeanPostProcessors(ConfigurableListableBeanFactory beanFactory) {
 		PostProcessorRegistrationDelegate.registerBeanPostProcessors(beanFactory, this);
