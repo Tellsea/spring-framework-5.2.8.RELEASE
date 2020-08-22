@@ -43,26 +43,28 @@ package org.springframework.core;
 public interface Ordered {
 
 	/**
-	 * Useful constant for the highest precedence value.
+	 * 最高级(数值最小)
+	 *
 	 * @see java.lang.Integer#MIN_VALUE
 	 */
 	int HIGHEST_PRECEDENCE = Integer.MIN_VALUE;
 
 	/**
-	 * Useful constant for the lowest precedence value.
+	 * 最低级(数值最大)
+	 *
 	 * @see java.lang.Integer#MAX_VALUE
 	 */
 	int LOWEST_PRECEDENCE = Integer.MAX_VALUE;
 
 
 	/**
-	 * Get the order value of this object.
-	 * <p>Higher values are interpreted as lower priority. As a consequence,
-	 * the object with the lowest value has the highest priority (somewhat
-	 * analogous to Servlet {@code load-on-startup} values).
-	 * <p>Same order values will result in arbitrary sort positions for the
-	 * affected objects.
-	 * @return the order value
+	 * 获取该对象的order值。
+	 * <p>较高的值被解释为较低的优先级。作为结果，
+	 * 值最低的对象具有最高优先级（有点
+	 * 类似于Servlet {@ code-on-startup}值）。
+     * <p>相同的order值将导致受影响的对象任意排序位置
+     *
+     * @return 排序值
 	 * @see #HIGHEST_PRECEDENCE
 	 * @see #LOWEST_PRECEDENCE
 	 */

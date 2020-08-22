@@ -16,47 +16,40 @@
 
 package org.springframework.core.annotation;
 
-import java.lang.reflect.AnnotatedElement;
-import java.util.Arrays;
-import java.util.List;
-
 import org.springframework.core.DecoratingProxy;
 import org.springframework.core.OrderComparator;
 import org.springframework.core.annotation.MergedAnnotations.SearchStrategy;
 import org.springframework.lang.Nullable;
 
+import java.lang.reflect.AnnotatedElement;
+import java.util.Arrays;
+import java.util.List;
+
 /**
- * {@code AnnotationAwareOrderComparator} is an extension of
- * {@link OrderComparator} that supports Spring's
- * {@link org.springframework.core.Ordered} interface as well as the
- * {@link Order @Order} and {@link javax.annotation.Priority @Priority}
- * annotations, with an order value provided by an {@code Ordered}
- * instance overriding a statically defined annotation value (if any).
- *
- * <p>Consult the Javadoc for {@link OrderComparator} for details on the
- * sort semantics for non-ordered objects.
+ * AnnotationAwareOrderComparator是支持spring的Ordered接口，以及@Order和java的@Priority的注解，
+ * 他的顺序值由Ordered提供，实例重写静态定义的注释值（如果有）。
  *
  * @author Juergen Hoeller
  * @author Oliver Gierke
  * @author Stephane Nicoll
- * @since 2.0.1
  * @see org.springframework.core.Ordered
  * @see org.springframework.core.annotation.Order
  * @see javax.annotation.Priority
+ * @since 2.0.1
  */
 public class AnnotationAwareOrderComparator extends OrderComparator {
 
 	/**
-	 * Shared default instance of {@code AnnotationAwareOrderComparator}.
+	 * {@code AnnotationAwareOrderComparator}的共享默认实例。
 	 */
 	public static final AnnotationAwareOrderComparator INSTANCE = new AnnotationAwareOrderComparator();
 
 
 	/**
-	 * This implementation checks for {@link Order @Order} or
-	 * {@link javax.annotation.Priority @Priority} on various kinds of
-	 * elements, in addition to the {@link org.springframework.core.Ordered}
-	 * check in the superclass.
+	 * 此实现检查{@link Order@Order}或
+	 * {@链接javax.annotation.Priority@优先权
+	 * 元素，以及{@链接org.springframework.core.有序的}
+	 * 检查超类。
 	 */
 	@Override
 	@Nullable
@@ -80,10 +73,10 @@ public class AnnotationAwareOrderComparator extends OrderComparator {
 	}
 
 	/**
-	 * This implementation retrieves an @{@link javax.annotation.Priority}
-	 * value, allowing for additional semantics over the regular @{@link Order}
-	 * annotation: typically, selecting one object over another in case of
-	 * multiple matches but only one object to be returned.
+	 * 此实现检索@{@链接javax.annotation.Priority}
+	 * 值，允许在常规的@{@link Order}上附加语义
+	 * 注释：通常，在
+	 * 多个匹配项，但只返回一个对象。
 	 */
 	@Override
 	@Nullable
@@ -92,7 +85,7 @@ public class AnnotationAwareOrderComparator extends OrderComparator {
 			return OrderUtils.getPriority((Class<?>) obj);
 		}
 		Integer priority = OrderUtils.getPriority(obj.getClass());
-		if (priority == null  && obj instanceof DecoratingProxy) {
+		if (priority == null && obj instanceof DecoratingProxy) {
 			return getPriority(((DecoratingProxy) obj).getDecoratedClass());
 		}
 		return priority;
@@ -100,10 +93,11 @@ public class AnnotationAwareOrderComparator extends OrderComparator {
 
 
 	/**
-	 * Sort the given list with a default {@link AnnotationAwareOrderComparator}.
-	 * <p>Optimized to skip sorting for lists with size 0 or 1,
-	 * in order to avoid unnecessary array extraction.
-	 * @param list the List to sort
+	 * 使用默认的{@link AnnotationAwareOrderComparator}对给定列表进行排序。
+	 * <p>优化为跳过大小为0或1的列表的排序，
+	 * 为了避免不必要的数组提取。
+	 *
+	 * @param list 要排序的列表
 	 * @see java.util.List#sort(java.util.Comparator)
 	 */
 	public static void sort(List<?> list) {
@@ -113,10 +107,11 @@ public class AnnotationAwareOrderComparator extends OrderComparator {
 	}
 
 	/**
-	 * Sort the given array with a default AnnotationAwareOrderComparator.
-	 * <p>Optimized to skip sorting for lists with size 0 or 1,
-	 * in order to avoid unnecessary array extraction.
-	 * @param array the array to sort
+	 * 使用默认注释awareOrderComparator对给定数组进行排序。
+	 * <p>优化为跳过大小为0或1的列表的排序，
+	 * 为了避免不必要的数组提取。
+	 *
+	 * @param array 要排序的数组
 	 * @see java.util.Arrays#sort(Object[], java.util.Comparator)
 	 */
 	public static void sort(Object[] array) {
@@ -126,20 +121,19 @@ public class AnnotationAwareOrderComparator extends OrderComparator {
 	}
 
 	/**
-	 * Sort the given array or List with a default AnnotationAwareOrderComparator,
-	 * if necessary. Simply skips sorting when given any other value.
-	 * <p>Optimized to skip sorting for lists with size 0 or 1,
-	 * in order to avoid unnecessary array extraction.
-	 * @param value the array or List to sort
+	 * 使用默认注释awareOrderComparator对给定的数组或列表进行排序，
+	 * 如有必要。当给定任何其他值时，只需跳过排序。
+	 * <p>优化为跳过大小为0或1的列表的排序，
+	 * 为了避免不必要的数组提取。
+	 *
+	 * @param value 要排序的数组或列表
 	 * @see java.util.Arrays#sort(Object[], java.util.Comparator)
 	 */
 	public static void sortIfNecessary(Object value) {
 		if (value instanceof Object[]) {
 			sort((Object[]) value);
-		}
-		else if (value instanceof List) {
+		} else if (value instanceof List) {
 			sort((List<?>) value);
 		}
 	}
-
 }
