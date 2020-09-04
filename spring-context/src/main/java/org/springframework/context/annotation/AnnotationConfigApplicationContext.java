@@ -82,10 +82,12 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 * from the given component classes and automatically refreshing the context.
 	 * @param componentClasses one or more component classes &mdash; for example,
 	 * {@link Configuration @Configuration} classes
+	 * 创建一个新的AnnotationConfigApplicationContext，并自动刷新上下文
 	 */
 	public AnnotationConfigApplicationContext(Class<?>... componentClasses) {
 		this();
 		register(componentClasses);
+		// 9个大步骤
 		refresh();
 	}
 
